@@ -43,28 +43,17 @@ class MainActivity2 : ComponentActivity() {
 
         var money = mutableStateOf(intent.getIntExtra("money",0))
         var clickval = mutableStateOf(intent.getIntExtra("clickval",1))
-        var autoval = mutableStateOf(intent.getIntExtra("autoval",0))
         setContent {
-            Shop(this,money,clickval,autoval)
+            Shop(this,money,clickval)
         }
     }
 }
 
 @Composable
-fun Shop(activity : Activity, money : MutableState<Int>, clickval : MutableState<Int>, autoval : MutableState<Int>)
+fun Shop(activity : Activity, money : MutableState<Int>, clickval : MutableState<Int>)
 {
     var context = LocalContext.current
-    var autoCost by remember { mutableStateOf(1)}
-    var clickCost by remember { mutableStateOf(1)}
-
-    for ( i in 1.. clickval.value)
-    {
-        autoCost *= 2
-    }
-    for ( i in 1.. autoval.value)
-    {
-        clickCost *= 2
-    }
+    var clickCost by remember { mutableStateOf(100)}
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -77,11 +66,8 @@ fun Shop(activity : Activity, money : MutableState<Int>, clickval : MutableState
             horizontalAlignment = Alignment.CenterHorizontally
         )
         {
-            Text(text = "money: ${money.value}")
-            Text(text = "current auto is:",
-                fontSize = 40.sp,
-                textAlign = TextAlign.Center)
-            Text(text = "current per click is:",
+            Text(text = "money: ${MainActivity.money.value}")
+            Text(text = "current per click is:\n${MainActivity.clickval.value}",
                 fontSize = 40.sp,
                 textAlign = TextAlign.Center)
 
@@ -90,19 +76,9 @@ fun Shop(activity : Activity, money : MutableState<Int>, clickval : MutableState
             {
                 Button(
                     shape = RectangleShape,
-                    colors = ButtonDefaults.buttonColors(Color.Blue),
-                    onClick = {Buy(context,1,autoCost,clickCost,money)},
-                    modifier = Modifier.size(width = 200.dp, height = 300.dp)
-                )
-                {
-                    Text(text = "add auto for ${autoCost}")
-                }
-
-                Button(
-                    shape = RectangleShape,
                     colors = ButtonDefaults.buttonColors(Color.Cyan),
-                    onClick = {Buy(context,2,autoCost,clickCost,money)},
-                    modifier = Modifier.size(width = 200.dp, height = 300.dp)
+                    onClick = {Buy(context,2,clickCost,money)},
+                    modifier = Modifier.size(width = 400.dp, height = 300.dp)
                 )
                 {
                     Text(text = "add per click for ${clickCost}")
@@ -112,7 +88,7 @@ fun Shop(activity : Activity, money : MutableState<Int>, clickval : MutableState
             Button(
                 shape = RectangleShape,
                 colors = ButtonDefaults.buttonColors(Color.Gray),
-                onClick = {Back(activity,money,clickval,autoval)},
+                onClick = {Back(activity,money,clickval)},
                 modifier = Modifier.size(width = 400.dp, height = 180.dp)
             )
             {
@@ -122,19 +98,15 @@ fun Shop(activity : Activity, money : MutableState<Int>, clickval : MutableState
     }
 }
 
-fun Buy(context : Context, type : Int, autoCost : Int, clickCost : Int,money : MutableState<Int>)
+fun Buy(context : Context, type : Int, clickCost : Int,money : MutableState<Int>)
 {
-    if(type == 1 && money.value > autoCost) money.value  -= autoCost
-    if(type == 2 && money.value > clickCost) money.value -= clickCost
-    autoCost *= 2
-    clickCost *= 2
+    if(type == 2 && MainActivity.money.value > clickCost) {
+        MainActivity.money.value -= clickCost
+        MainActivity.clickval.value += 1;
+    }
 }
 
-fun Back(activity : Activity, money : MutableState<Int>, clickval : MutableState<Int>, autoval : MutableState<Int>)
+fun Back(activity : Activity, money : MutableState<Int>, clickval : MutableState<Int>)
 {
-    MainActivity.money.value = money.value
-    MainActivity.autoval.value = autoval.value
-    MainActivity.clickval.value = clickval.value
-
     activity.finish()
 }
