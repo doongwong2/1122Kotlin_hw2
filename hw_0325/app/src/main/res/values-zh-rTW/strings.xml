@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">hw_0325</string>
-    <string name="button">change scene button</string>
-    <string name="click">click for money</string>
-    <string name="clickval">money per click</string>
-    <string name="autoval">money per auto</string>
+    <string name="button">更換頁面</string>
+    <string name="click">點擊拿錢</string>
+    <string name="clickval">每點擊獲得</string>
+    <string name="autoval">挂機一秒獲得</string>
     <string name="title_activity_main2">MainActivity2</string>
-    <string name="current_per_click">current per click is:</string>
-    <string name="add_per_click">add per click for</string>
-    <string name="money">money</string>
+    <string name="current_per_click">目前每點擊獲得數：</string>
+    <string name="add_per_click">購買每次點擊數費用：</string>
+    <string name="money">戶頭</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>

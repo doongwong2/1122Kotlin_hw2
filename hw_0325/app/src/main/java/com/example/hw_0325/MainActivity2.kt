@@ -66,8 +66,8 @@ fun Shop(activity : Activity, money : MutableState<Int>, clickval : MutableState
             horizontalAlignment = Alignment.CenterHorizontally
         )
         {
-            Text(text = "money: ${MainActivity.money.value}")
-            Text(text = "current per click is:\n${MainActivity.clickval.value}",
+            Text(text = stringResource(id = R.string.money)+"：${MainActivity.money.value}")
+            Text(text = stringResource(id = R.string.current_per_click)+"\n${MainActivity.clickval.value}",
                 fontSize = 40.sp,
                 textAlign = TextAlign.Center)
 
@@ -81,7 +81,7 @@ fun Shop(activity : Activity, money : MutableState<Int>, clickval : MutableState
                     modifier = Modifier.size(width = 400.dp, height = 300.dp)
                 )
                 {
-                    Text(text = "add per click for ${clickCost}")
+                    Text(text = stringResource(id = R.string.add_per_click) + "${clickCost}")
                 }
             }
 
@@ -92,7 +92,7 @@ fun Shop(activity : Activity, money : MutableState<Int>, clickval : MutableState
                 modifier = Modifier.size(width = 400.dp, height = 180.dp)
             )
             {
-                Text(text = stringResource(R.string.button))
+                Text(text = stringResource(id = R.string.button))
             }
         }
     }

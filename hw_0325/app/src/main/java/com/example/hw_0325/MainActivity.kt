@@ -77,8 +77,8 @@ fun Activity1()
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth())
 
-            Text(text = stringResource(R.string.clickval) + ": ${MainActivity.clickval.value}")
-            Text(text = stringResource(R.string.autoval) + ": ${MainActivity.autoval.value}")
+            Text(text = stringResource(id = R.string.clickval) + ": ${MainActivity.clickval.value}")
+            Text(text = stringResource(id = R.string.autoval) + ": ${MainActivity.autoval.value}")
             Button(
                 shape = RectangleShape,
                 onClick = {BtnFun(context)},
@@ -94,7 +94,7 @@ fun Activity1()
                 modifier = Modifier.size(width = 400.dp, height = 180.dp)
             )
             {
-                Text(text = stringResource(R.string.button))
+                Text(text = stringResource(id = R.string.button))
             }
         }
     }
